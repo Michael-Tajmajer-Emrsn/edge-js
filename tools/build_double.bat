@@ -106,7 +106,9 @@ pushd "%SELF%\.."
 "%NODEEXE%" "%GYP%" build
 mkdir "%SELF%\build\nuget\content\edge\%2" > nul 2>&1
 copy /y build\release\edge_nativeclr.node "%SELF%\build\nuget\content\edge\%2"
+copy /y build\release\edge_nativeclr.pdb "%SELF%\build\nuget\content\edge\%2"
 copy /y "%SELF%\build\node-%1-%2\node.dll" "%SELF%\build\nuget\content\edge\%2"
+copy /y "%SELF%\build\node-%1-%2\node.pdb" "%SELF%\build\nuget\content\edge\%2"
 
 popd
 
