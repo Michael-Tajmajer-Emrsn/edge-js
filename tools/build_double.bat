@@ -58,7 +58,8 @@ if %ERRORLEVEL% neq 0 exit /b -1
 call :build_edge %1 x64 x64
 if %ERRORLEVEL% neq 0 exit /b -1
 
-csc /out:"%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.dll" /debug /pdb:"%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.pdb" /target:library "%SELF%\..\src\double\Edge.js\dotnet\EdgeJs.cs"
+rem csc /out:"%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.dll" /debug /pdb:"%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.pdb" /target:library "%SELF%\..\src\double\Edge.js\dotnet\EdgeJs.cs"
+csc /out:"%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.dll" /target:library "%SELF%\..\src\double\Edge.js\dotnet\EdgeJs.cs"
 if %ERRORLEVEL% neq 0 exit /b -1
 
 cd "%SELF%\..\src\double\Edge.js"
