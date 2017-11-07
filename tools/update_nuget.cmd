@@ -37,3 +37,6 @@ copy /y "%SELF%\build\node-%1-x86\node.dll"                            "%SELF%\b
 copy /y "%SELF%\build\node-%1-x86\node.pdb"                            "%SELF%\build\nuget\content\edge\x86"
 rem copy /y "%SELF%\build\nuget\content\edge\x86\edge_nativeclr.node"      "%SELF%\build\nuget\content\edge\x86"
 rem copy /y "%SELF%\build\nuget\content\edge\x86\edge_nativeclr.pdb"       "%SELF%\build\nuget\content\edge\x86"
+
+rem cleanup
+rd /s /q "%SELF%\build\nuget\lib\netstandard1.6"
