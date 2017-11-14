@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
+[assembly:AssemblyVersionAttribute("8.9.0.0")]
 namespace EdgeJs
 {
     public class Edge
@@ -81,7 +82,7 @@ namespace EdgeJs
                                 "Unsupported architecture. Only x86 and x64 are supported.");
                         }
 
-                        Thread v8Thread = new Thread(() => 
+                        Thread v8Thread = new Thread(() =>
                         {
                             List<string> argv = new List<string>();
                             argv.Add("node");
