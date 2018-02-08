@@ -1,5 +1,4 @@
-
-rem @echo off
+@echo off
 set SELF=%~dp0
 if "%1" equ "" (
     echo Usage: update_nuget.cmd {node_version}

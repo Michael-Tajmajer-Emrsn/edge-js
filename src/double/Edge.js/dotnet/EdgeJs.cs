@@ -7,7 +7,9 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
+#if DOTNETVERSION
 [assembly:AssemblyVersionAttribute("8.9.0.0")]
+#endif
 namespace EdgeJs
 {
     public class Edge
@@ -37,6 +39,11 @@ namespace EdgeJs
                 return assemblyDirectory;
             }
         }
+
+        public static void SetAssemblyDirectory(string folder)
+	    {
+		    assemblyDirectory = folder;
+	    }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Task<object> InitializeInternal(object input)
