@@ -1,12 +1,13 @@
 # Edge.js: .NET and Node.js in-process 
-[![Build Status](https://travis-ci.org/agracio/edge-js.svg)](https://travis-ci.org/agracio/edge-js)[![Build status](https://ci.appveyor.com/api/projects/status/3hs8xq7jieufw507/branch/master?svg=true)](https://ci.appveyor.com/project/agracio/edge-js/branch/master)
+[![Build Status](https://travis-ci.org/agracio/edge-js.svg)](https://travis-ci.org/agracio/edge-js)
+[![Build status](https://ci.appveyor.com/api/projects/status/3hs8xq7jieufw507/branch/master?svg=true)](https://ci.appveyor.com/project/agracio/edge-js/branch/master)
 
 
 This is a fork of [Edge.js](https://github.com/tjanczuk/edge) providing improvements and bug fixes that are not yet accepted into main Edge.js repo.
 
-NPM package is published to `edge-js`.
+**NPM** package is published as `edge-js`. https://www.npmjs.com/package/edge-js.
 
-Currently there is no support for **nuget** package, precompiled binaries are available from [release page](https://github.com/agracio/edge-js/releases).
+**NuGet** package is published as [EdgeJs](https://www.nuget.org/packages/EdgeJs).
 
 Usage is same as edge, replace `require('edge')` with `require('edge-js')`:
 
@@ -25,12 +26,20 @@ var helloWorld = edge.func(function () {/*
 */});
 ```
 
+## Main differences from `edge`
+
+* Support for Node.Js 6.x, 7.x, 8.x, 9.x
+* Support for .NET Core 1.0.1 - 2.0 on Windows/Linux/macOS.
+* Support for Mono runtime 4.8.x - 5.x. 
+* Fixes AccessViolationException when running Node.js code from C# [PR #573](https://github.com/tjanczuk/edge/pull/573).
+* Fixes StackOverflowException [PR #566](https://github.com/tjanczuk/edge/pull/566) that occurs when underlying C# code throws complex exception.
+
 Edge.js readme
 ==============================
 
 **NEW** Edge.js is now on Slack at https://edgejs.slack.com. Join [here](https://webtask.it.auth0.com/api/run/tjanczuk/edgejs-slack-invite). 
  
-An edge connects two nodes. This edge connects Node.js and .NET. V8 and CLR/.NET Core/Mono - in process. On Windows, MacOS, and Linux. 
+An edge connects two nodes. This edge connects Node.js and .NET. V8 and CLR/.NET Core/Mono - in process. On Windows, macOS, and Linux. 
 
 ![image](https://cloud.githubusercontent.com/assets/822369/11969685/e9476f3a-a8d1-11e5-94d4-847bfc4ed960.png)
 
@@ -155,7 +164,7 @@ Listen to the [Edge.js podcast on Herdingcode](http://herdingcode.com/herding-co
 
 ## Introduction 
 
-Edge.js allows you to run Node.js and .NET code in one process on Windows, MacOS, and Linux. 
+Edge.js allows you to run Node.js and .NET code in one process on Windows, macOS, and Linux. 
 
 You can call .NET functions from Node.js and Node.js functions from .NET. Edge.js takes care of marshalling data between CLR and V8. Edge.js also reconciles threading models of single threaded V8 and multi-threaded CLR. Edge.js ensures correct lifetime of objects on V8 and CLR heaps. The CLR code can be pre-compiled or specified as C#, F#, Python, or PowerShell source: Edge.js can compile CLR scripts at runtime. Edge can be extended to support other CLR languages or DSLs.
 
@@ -164,7 +173,7 @@ You can call .NET functions from Node.js and Node.js functions from .NET. Edge.j
 Edge.js provides an asynchronous, in-process mechanism for interoperability between Node.js and .NET. You can use this mechanism to:
 
 * script Node.js from a .NET application (console app, ASP.NET, etc.)
-* script C# from a Node.js application on Windows, MacOS, and Linux
+* script C# from a Node.js application on Windows, macOS, and Linux
 * access MS SQL from Node.js using ADO.NET [more...](http://blog.codeship.io/2014/04/22/leverage-sql-server-with-node-js-using-edge-js.html)  
 * use CLR multi-threading from Node.js for CPU intensive work [more...](http://tomasz.janczuk.org/2013/02/cpu-bound-workers-for-nodejs.html)  
 * write native extensions to Node.js in C# instead of C/C++  
@@ -176,7 +185,7 @@ Read more about the background and motivations of the project [here](http://toma
 
 ## Scripting CLR from Node.js
 
-If you are writing a Node.js application, this section explains how you include and run CLR code in your app. It works on Windows, MacOS, and Linux.
+If you are writing a Node.js application, this section explains how you include and run CLR code in your app. It works on Windows, macOS, and Linux.
 
 ### What you need
 
@@ -430,7 +439,7 @@ var add7 = edge.func({
 });
 ```
 
-If you are using .NET Core and are using the .NET Core SDK and CLI, you must have a `project.json` file (specification [here](https://github.com/aspnet/Home/wiki/Project.json-file)) that specifies the dependencies for the application.  This list of dependencies must also include the [Edge.js runtime package](https://www.nuget.org/packages/Edge.js/) and, if you need to be able to dynamically compile your code, the package(s) for the compilers that you plan to use, like [Edge.js.CSharp](https://www.nuget.org/packages/Edge.js.CSharp/).  You must have run the `dotnet restore` (to restore the dependencies) and `dotnet build` (to build your project and generate the dependency manifest) commands in that project's directory to generate a `.deps.json` file under `bin/[configuration]/[framework]`, i.e. `bin/Release/netstandard1.6/MyProject.deps.json`.  This `.deps.json` file must either be in the current working directory that `node` is executed in or you must specify its directory by setting the `EDGE_APP_ROOT` environment variable.  For example, if for a `netstandard1.6` project in the `c:\DotNet\MyProject` directory, you would run something like:
+If you are using .NET Core and are using the .NET Core SDK and CLI, you must have a `project.json` file (specification [here](https://github.com/aspnet/Home/wiki/Project.json-file)) that specifies the dependencies for the application.  This list of dependencies must also include the [Edge.js runtime package](https://www.nuget.org/packages/EdgeJs/) and, if you need to be able to dynamically compile your code, the package(s) for the compilers that you plan to use, like [Edge.js.CSharp](https://www.nuget.org/packages/Edge.js.CSharp/).  You must have run the `dotnet restore` (to restore the dependencies) and `dotnet build` (to build your project and generate the dependency manifest) commands in that project's directory to generate a `.deps.json` file under `bin/[configuration]/[framework]`, i.e. `bin/Release/netstandard1.6/MyProject.deps.json`.  This `.deps.json` file must either be in the current working directory that `node` is executed in or you must specify its directory by setting the `EDGE_APP_ROOT` environment variable.  For example, if for a `netstandard1.6` project in the `c:\DotNet\MyProject` directory, you would run something like:
 
 ```
 set EDGE_APP_ROOT=c:\DotNet\MyProject\bin\Release\netstandard1.6
@@ -1243,7 +1252,7 @@ To build one of the versions of Node.js officially released by [Node.js](http://
 
 ```
 cd tools
-build.bat release 8.9.0
+build.bat release 8.9.3
 ```
 
 Note: the Node.js version number you provide must be version number corresponding to one of the subdirectories of http://nodejs.org/dist. The command will build both x32 and x64 architectures (assuming you use x64 machine). The command will also copy the edge\_\*.node executables to appropriate locations under lib\native directory where they are looked up from at runtime. The `npm install` step copies the C standard library shared DLL to the location of the edge\_\*.node files for the component to be ready to go.
@@ -1383,21 +1392,21 @@ node sample.js
 
 ## Scripting Node.js from CLR
 
-If you are writing a CLR application (e.g. a C# console application or ASP.NET web app), this section explains how you include and run Node.js code in your app. Currently it works on Windows using desktop CLR, but support for MacOS, and Linux as well as .NET Core is coming soon. 
+If you are writing a CLR application (e.g. a C# console application or ASP.NET web app), this section explains how you include and run Node.js code in your app. Currently it works on Windows using desktop CLR, but support for macOS, and Linux as well as .NET Core is coming soon. 
 
 ### What you need
 
 You need Windows with:
 
 * [.NET 4.5](http://www.microsoft.com/en-us/download/details.aspx?id=30653)  
-* [Edge.js NuGet package](https://www.nuget.org/packages/Edge.js)  
+* [Edge.js NuGet package](https://www.nuget.org/packages/EdgeJs)  
 * [Node.js](http://nodejs.org) (optional, if you want to use additional NPM packages)
 
-Edge.js support for scripting Node.js ships as a NuGet Package called `Edge.js`. It comes with everything you need to get started writing applications for x86 and x64 architectures. However, if you want to use additional Node.js packages from NPM, you must separately install Node.js runtime to access the NPM package manager. The latest Edge.js NuGet package has been developed and tested with Node.js v8.9.0. Older Edge.js packages exist for prior versions of Node.js. If you choose a different version of Node.js to install NPM packages, your mileage can vary. 
+Edge.js support for scripting Node.js ships as a NuGet Package called `Edge.js`. It comes with everything you need to get started writing applications for x86 and x64 architectures. However, if you want to use additional Node.js packages from NPM, you must separately install Node.js runtime to access the NPM package manager. The latest Edge.js NuGet package has been developed and tested with Node.js v8.9.3. Older Edge.js packages exist for prior versions of Node.js. If you choose a different version of Node.js to install NPM packages, your mileage can vary. 
 
 **NOTE** you cannot use native Node.js extensions when scripting Node.js from CLR using Edge. 
 
-You can install the [Edge.js NuGet package](https://www.nuget.org/packages/Edge.js) using the Visual Studio built-in NuGet package management functionality or using the stand-alone [NuGet client](http://docs.nuget.org/docs/start-here/installing-nuget). 
+You can install the [Edge.js NuGet package](https://www.nuget.org/packages/EdgeJs) using the Visual Studio built-in NuGet package management functionality or using the stand-alone [NuGet client](http://docs.nuget.org/docs/start-here/installing-nuget). 
 
 ### How to: Node.js hello, world
 
@@ -1708,14 +1717,14 @@ These are unstructions for building the Edge.js NuGet package on Windows. The pa
 Preprequisties:
 
 * Visual Studio 2015   
-* Node.js (tested with v8.9.0)  
+* Node.js (tested with v8.9.3)  
 * Python 2.7.x  
 * node-gyp (tested with 3.6.1)  
 
 To buid the NuGet package, open the Visual Studio 2013 Developer Command Prompt and call:
 
 ```
-tools\build_double.bat 8.9.0
+tools\build_double_new.bat 8.9.3
 ```
 
 (you can substitite another version of Node.js).
@@ -1730,7 +1739,7 @@ The script takes several minutes to complete and does the following:
 * builds managed EdgeJs.dll library that bootstraps running Node.js in a CLR process and provides the Edge.Func programming model  
 * packs everything into a NuGet package
 
-If everything goes well, the resulting NuGet package is located in the `tools\build\nuget` directory. 
+If everything goes well, the resulting NuGet package is located in the `tools\nuget` directory. 
 
 ### Running tests of scripting Node.js in C#
 

@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 #if DOTNETVERSION
-[assembly:AssemblyVersionAttribute("8.9.0.0")]
+[assembly:AssemblyVersionAttribute("8.9.3.0")]
 #endif
 namespace EdgeJs
 {
@@ -18,6 +18,13 @@ namespace EdgeJs
         static bool initialized;
         static Func<object, Task<object>> compileFunc;
         static ManualResetEvent waitHandle = new ManualResetEvent(false);
+        private static string edgeDirectory;
+
+        static Edge()
+        {
+            // needed because we *must* load the edgedll from the original location else we'll freeze up.
+            edgeDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(Edge)).Location);
+        }
 
         static string assemblyDirectory;
         static string AssemblyDirectory
@@ -40,9 +47,10 @@ namespace EdgeJs
             }
         }
 
+        // in case we want to set this path and not use an enviroment var
         public static void SetAssemblyDirectory(string folder)
 	    {
-		    assemblyDirectory = folder;
+			assemblyDirectory = folder;
 	    }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -101,7 +109,8 @@ namespace EdgeJs
                                     argv.Add(p);
                                 }
                             }
-                            argv.Add(AssemblyDirectory + "\\edge\\double_edge.js");
+                            argv.Add(Path.Combine(AssemblyDirectory, "edge", "double_edge.js"));
+                            argv.Add($"-EdgeJs:{Path.Combine(edgeDirectory, "EdgeJs.dll")}");
                             nodeStart(argv.Count, argv.ToArray());
                             waitHandle.Set();
                         });

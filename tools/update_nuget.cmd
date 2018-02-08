@@ -11,12 +11,25 @@ copy /y "%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.dll"             
 copy /y "%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.pdb"                 "%SELF%\build\nuget\lib\net40"
 
 md "%SELF%\build\nuget\lib\net45"
-copy /y "%SELF%\..\src\double\Edge.js\bin\x64\Release\net45\EdgeJs.dll"             "%SELF%\build\nuget\lib\net45"
-copy /y "%SELF%\..\src\double\Edge.js\bin\x64\Release\net45\EdgeJs.pdb"             "%SELF%\build\nuget\lib\net45"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\net45\EdgeJs.dll"             "%SELF%\build\nuget\lib\net45"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\net45\EdgeJs.pdb"             "%SELF%\build\nuget\lib\net45"
 
-rem md "%SELF%\build\nuget\lib\netcoreapp1.1"
-rem copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netcoreapp1.1\EdgeJs.dll"  "%SELF%\build\nuget\lib\netcoreapp1.1"
-rem copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netcoreapp1.1\EdgeJs.pdb"  "%SELF%\build\nuget\lib\netcoreapp1.1"
+md "%SELF%\build\nuget\lib\netcoreapp1.1"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netcoreapp1.1\EdgeJs.dll"     "%SELF%\build\nuget\lib\netcoreapp1.1"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netcoreapp1.1\EdgeJs.pdb"     "%SELF%\build\nuget\lib\netcoreapp1.1"
+
+md "%SELF%\build\nuget\lib\netcoreapp2.0"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netcoreapp2.0\EdgeJs.dll"     "%SELF%\build\nuget\lib\netcoreapp2.0"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netcoreapp2.0\EdgeJs.pdb"     "%SELF%\build\nuget\lib\netcoreapp2.0"
+
+md "%SELF%\build\nuget\lib\netstandard1.6"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netstandard1.6\EdgeJs.dll"    "%SELF%\build\nuget\lib\netstandard1.6"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netstandard1.6\EdgeJs.pdb"    "%SELF%\build\nuget\lib\netstandard1.6"
+
+md "%SELF%\build\nuget\lib\netstandard2.0"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netstandard2.0\EdgeJs.dll"    "%SELF%\build\nuget\lib\netstandard2.0"
+copy /y "%SELF%\..\src\double\Edge.js\bin\win32\Release\netstandard2.0\EdgeJs.pdb"    "%SELF%\build\nuget\lib\netstandard2.0"
+
 
 md "%SELF%\build\nuget\content"
 md "%SELF%\build\nuget\content\edge"
@@ -38,4 +51,4 @@ rem copy /y "%SELF%\build\nuget\content\edge\x86\edge_nativeclr.node"      "%SEL
 rem copy /y "%SELF%\build\nuget\content\edge\x86\edge_nativeclr.pdb"       "%SELF%\build\nuget\content\edge\x86"
 
 rem cleanup
-rd /s /q "%SELF%\build\nuget\lib\netstandard1.6"
+rem rd /s /q "%SELF%\build\nuget\lib\netstandard1.6"

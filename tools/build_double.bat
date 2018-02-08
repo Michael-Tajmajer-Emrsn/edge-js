@@ -1,4 +1,4 @@
-rem @echo off
+@echo off
 set SELF=%~dp0
 if "%1" equ "" (
     echo Usage: build_double.bat {node_version}
@@ -17,7 +17,7 @@ if not exist "%SELF%\build\download.exe" (
 )
 
 if not exist "%SELF%\build\unzip.exe" (
- 	csc /out:"%SELF%\build\unzip.exe" /r:System.IO.Compression.FileSystem.dll "%SELF%\unzip.cs"
+	csc /out:"%SELF%\build\unzip.exe" /r:System.IO.Compression.FileSystem.dll "%SELF%\unzip.cs"
 )
 
 if not exist "%SELF%\build\repl.exe" (
@@ -62,20 +62,20 @@ rem csc /out:"%SELF%\..\src\double\Edge.js\bin\Release\net40\EdgeJs.dll" /target
 if %ERRORLEVEL% neq 0 exit /b -1
 
 cd "%SELF%\..\src\double\Edge.js"
+dotnet --version
 dotnet restore
 if %ERRORLEVEL% neq 0 exit /b -1
-dotnet build --configuration Release --framework net45
-
-rem if %ERRORLEVEL% neq 0 exit /b -1
-rem dotnet build --configuration Release --framework netstandard1.6
-rem if %ERRORLEVEL% neq 0 exit /b -1
-rem dotnet build --configuration Release --framework netstandard2.0
-rem if %ERRORLEVEL% neq 0 exit /b -1
-rem dotnet build --configuration Release --framework net40
-rem if %ERRORLEVEL% neq 0 exit /b -1
-rem dotnet build --configuration Release --framework net45
-
+dotnet build --configuration Release --framework netcoreapp1.1
 if %ERRORLEVEL% neq 0 exit /b -1
+dotnet build --configuration Release --framework netcoreapp2.0
+if %ERRORLEVEL% neq 0 exit /b -1
+dotnet build --configuration Release --framework netstandard1.6
+if %ERRORLEVEL% neq 0 exit /b -1
+dotnet build --configuration Release --framework netstandard2.0
+if %ERRORLEVEL% neq 0 exit /b -1
+dotnet build --configuration Release --framework net45
+if %ERRORLEVEL% neq 0 exit /b -1
+
 dotnet pack --configuration Release --no-build
 
 if %ERRORLEVEL% neq 0 (
